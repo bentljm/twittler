@@ -16,6 +16,9 @@ window.users = Object.keys(streams.users);
 // utility function for adding tweets to our data structures
 var addTweet = function(newTweet){
   var username = newTweet.user;
+  if(streams.users[username] === undefined) {
+    streams.users[username] = [];
+  }
   streams.users[username].push(newTweet);
   streams.home.push(newTweet);
 };
@@ -37,12 +40,37 @@ var randomMessage = function(){
   return [randomElement(opening), randomElement(verbs), randomElement(objects), randomElement(nouns), randomElement(tags)].join(' ');
 };
 
+var getDate = function() {
+  var d = new Date();
+  day = d.getDate();
+  month = d.getMonth() + 1;
+  year = d.getFullYear();
+  if(d.getHours() > 12) {
+    hours = d.getHours() - 12;
+    time = "PM"
+  } else {
+    hours = d.getHours();
+    time = "AM"
+  }
+  if(d.getMinutes() < 10) {
+    minutes = "0" + d.getMinutes();
+  } else {
+    minutes = d.getMinutes();
+  }
+  if(d.getSeconds() < 10) {
+    seconds = "0" + d.getSeconds();
+  } else {
+    seconds = d.getSeconds();
+  }
+  return "created " + [hours,minutes,seconds].join(":") + " " + time + " on " + [month, day].join('/');
+}
+
 // generate random tweets on a random schedule
 var generateRandomTweet = function(){
   var tweet = {};
   tweet.user = randomElement(users);
   tweet.message = randomMessage();
-  tweet.created_at = new Date();
+  tweet.created_at = getDate();
   addTweet(tweet);
 };
 
@@ -58,12 +86,13 @@ scheduleNextTweet();
 
 // utility function for letting students add "write a tweet" functionality
 // (note: not used by the rest of this file.)
-var writeTweet = function(message){
-  if(!visitor){
-    throw new Error('set the global visitor property!');
-  }
+var writeTweet = function(){
+  // if(!visitor){
+  //   throw new Error('set the global visitor property!');
+  // }
   var tweet = {};
-  tweet.user = visitor;
-  tweet.message = message;
+  tweet.user = prompt("What is your Twittler handle?");
+  tweet.message = prompt("What would you like to tweet?");
+  tweet.created_at = getDate();
   addTweet(tweet);
 };
