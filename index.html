@@ -8,6 +8,10 @@
     <h1>Twittler</h1>
       <h3>Followers</h3>
         <ul class="Followers"></ul> 
+          <li class = "shawndrost">@shawdrost</li>
+          <li class = "sharksforcheap">@sharksforcheap</li>
+          <li class = "mracus">@mracus</li>
+          <li class = "douglascalhoun">@douglascalhoun</li>
         <button class="New_Tweet">Click for more tweets</button>
         <button class="Write_Tweet">Write Tweet</button>
       <h3>Tweets</h3>
@@ -20,19 +24,49 @@
         $("h1").css({"margin": "20px 10px 20px", "text-decoration": "underline"})
         $("h3").css("margin", "20px 20px 20px")
 
+        $('.shawndrost').on('click', function() {
+            var index = 0;
+            while(index <= (streams.users.shawndrost.length - 1)) {
+              var tweet = streams.users.shawndrost[index];
+              var $tweet = $('<div></div>');
+              $tweet.text(tweet.created_at + ' @' + tweet.user + ': ' + tweet.message);
+              $tweet.insertAfter($('.shawndrost'));
+              index += 1;
+          }
+        })
 
-        for(var i = 0; i < users.length; i ++) {
-          var $users = $('<li></li>');
-          $users.text("@" + users[i]);
-          $users.appendTo($('.Followers'))
-        }
+        $('.sharksforcheap').on('click', function() {
+            var index = 0;
+            while(index <= (streams.users.sharksforcheap.length - 1)) {
+              var tweet = streams.users.sharksforcheap[index];
+              var $tweet = $('<div></div>');
+              $tweet.text(tweet.created_at + ' @' + tweet.user + ': ' + tweet.message);
+              $tweet.insertAfter($('.sharksforcheap'));
+              index += 1;
+          }
+        })
 
-        // $('.Followers').on('click', function() {
-        //     var user = $(this)
-        //     var $userTweets = $('<div></div>');
-        //     $userTweets.text(streams.users.user)
-        //     $userTweets.slideToggle();
-        // })
+        $('.mracus').on('click', function() {
+            var index = 0;
+            while(index <= (streams.users.mracus.length - 1)) {
+              var tweet = streams.users.mracus[index];
+              var $tweet = $('<div></div>');
+              $tweet.text(tweet.created_at + ' @' + tweet.user + ': ' + tweet.message);
+              $tweet.insertAfter($('.mracus'));
+              index += 1;
+          }
+        })
+
+        $('.douglascalhoun').on('click', function() {
+            var index = 0;
+            while(index <= (streams.users.douglascalhoun.length - 1)) {
+              var tweet = streams.users.douglascalhoun[index];
+              var $tweet = $('<div></div>');
+              $tweet.text(tweet.created_at + ' @' + tweet.user + ': ' + tweet.message);
+              $tweet.insertAfter($('.douglascalhoun'));
+              index += 1;
+            }
+        })
 
         $('.New_Tweet').on('click', function () {
           var index = 0;
