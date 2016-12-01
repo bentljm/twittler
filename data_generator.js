@@ -41,29 +41,9 @@ var randomMessage = function(){
 };
 
 var getDate = function() {
-  var d = new Date();
-  day = d.getDate();
-  month = d.getMonth() + 1;
-  year = d.getFullYear();
-  if(d.getHours() > 12) {
-    hours = d.getHours() - 12;
-    time = "PM"
-  } else {
-    hours = d.getHours();
-    time = "AM"
-  }
-  if(d.getMinutes() < 10) {
-    minutes = "0" + d.getMinutes();
-  } else {
-    minutes = d.getMinutes();
-  }
-  if(d.getSeconds() < 10) {
-    seconds = "0" + d.getSeconds();
-  } else {
-    seconds = d.getSeconds();
-  }
-  return "created " + [hours,minutes,seconds].join(":") + " " + time + " on " + [month, day].join('/');
-}
+  var date = new Date().toString("hh:mm tt on M/d/yy")
+  return "created at " + date
+ }
 
 // generate random tweets on a random schedule
 var generateRandomTweet = function(){
@@ -96,3 +76,4 @@ var writeTweet = function(){
   tweet.created_at = getDate();
   addTweet(tweet);
 };
+
